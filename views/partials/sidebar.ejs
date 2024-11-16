@@ -1,0 +1,89 @@
+<link rel="stylesheet" href="/css/sidebar.css" />
+<% 
+  let [sessions] =  await db.query("SELECT * FROM session");
+  var token = req.cookies.token;
+  var user = null , userID=null;
+  if(token){
+    for(let i = 0 ; i < sessions.length ;i++){
+      if(sessions[i].token==token) {
+        user = sessions[i].userName;
+        userID=sessions[i].userID;
+      }
+    } 
+  }
+%>
+<%
+const current_page = req._parsedUrl.pathname.split('/').pop();
+//const menu_items[];
+if(token && userID>10000){
+  var menu_items = [
+  {name: 'Profile', link:'/profile.html' },
+  { name: 'Home', link: '/home.html' },
+  { name: 'Wedding Package', link: 'wedding-package.html' },
+  { name: 'Photography', link: '/photography.html' },
+  { name: 'Gifts', link: '/gifts.html' },
+  { name: 'Cake', link: '/cake.html' },
+  { name: 'Venue', link: '/venues.html' },
+  { name: 'Invitation Cards', link: '/cards.html' },
+  ];
+}else if(token && userID>1000){
+  var menu_items = [
+  {name: 'Profile', link:'/profile.html' },
+  {name: 'Orders', link:'/orders.html' },
+  { name: 'Home', link: '/home.html' },
+  { name: 'Wedding Package', link: 'wedding-package.html' },
+  { name: 'Photography', link: '/photography.html' },
+  { name: 'Gifts', link: '/gifts.html' },
+  { name: 'Cake', link: '/cake.html' },
+  { name: 'Venue', link: '/venues.html' },
+  { name: 'Invitation Cards', link: '/cards.html' },
+  ];
+}else{
+  var menu_items = [
+  { name: 'Home', link: '/home.html' },
+  { name: 'Wedding Package', link: 'wedding-package.html' },
+  { name: 'Photography', link: '/photographer.html' },
+  { name: 'Gifts', link: '/gifts.html' },
+  { name: 'Cake', link: '/cake.html' },
+  { name: 'Venue', link: '/venues.html' },
+  { name: 'Invitation Cards', link: '/cards.html' },
+  ];
+
+}
+
+%>
+
+<div id="overlay"></div>
+<div class="bardiv">
+  <input type="checkbox" id="check" />
+  <label for="check">
+    <i class="fa fa-bars" id="barbutton"></i>
+    <i class="fa fa-times" id="cancel"></i>
+  </label>
+  <div class="sidebar">
+    <% if(user){ %>
+      <h3 class="menutext"><%=user %></h3>
+    <% }else {%>
+      <h3 class="menutext">Menu</h3>
+    <% } %>  
+
+    <% for (let i = 0; i < menu_items.length; i++) {
+      let item = menu_items[i];
+    %>
+    <a href="<%= item.link %>" class="<%= item.link.endsWith(current_page) ? 'current-page' : '' %>">
+      <i class="fa fa-link"></i><span><%= item.name %></span>
+    </a>
+    <%}%>
+  </div>
+</div>
+
+<script>
+  $('#overlay').on('click', function () {
+    $('#check').prop('checked', false)
+    $('#overlay').css('display', 'none')
+  })
+  $('#check').on('click', function () {
+    if ($('#check').prop('checked')) $('#overlay').css('display', 'block')
+    else $('#overlay').css('display', 'none')
+  })
+</script>

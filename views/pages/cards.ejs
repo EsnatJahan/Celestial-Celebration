@@ -1,0 +1,182 @@
+<html>
+
+<head>
+  <title><%= title %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/card.css" />
+</head>
+
+<body>
+  <%- await include("../partials/sidebar"); %>
+  <% let [cards]=await db.query("SELECT * FROM cards"); %>
+
+  <script>
+    var order_cake_id = null;
+    async function give_orders(order_cake_id, address, date) {
+      // console.log(order_cake_id);
+      try {
+        let response = await fetch("/api/customer-order", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            order_id: order_cake_id,
+            address,
+            date,
+          }),
+        })
+        if(response.ok){
+      //  console.log("123");
+        alert("Order confirmed");
+        }
+      } catch (e) {
+        console.error(e); // log the error
+      }
+      
+    }
+    function placeOrder(id , image) {
+      // console.log(id);
+      $('#order-menu').removeClass("disabled");
+      $('#imagecontainer').attr('src', image);
+      order_cake_id = id ;
+    }
+
+    function handleOrderSubmit(e) {
+      // let name = $('#name').val();
+      let address = $('#address').val();
+      let date = $('#date').val();
+      e.preventDefault();
+     // console.log(order_cake_id, name, address, date,time);
+
+      give_orders(order_cake_id, address, date);
+
+
+      order_cake_id = null;
+      $('#order-menu').addClass("disabled");
+      return false;
+    }
+    $(document).ready(() => {
+      $('#order-menu').addClass("disabled");
+      $('.overlay-background').click(() => {
+        order_cake_id = null;
+        $('#order-menu').addClass("disabled");
+      })
+    })
+  </script>
+
+<div id="order-menu" class="disabled">
+  <div class="overlay-background"></div>
+  <div class="overlay-form">
+
+    <form onsubmit="return handleOrderSubmit(event)">
+      <img id="imagecontainer" class="order_image">
+      <!-- <label for="name">Name
+        <input type="text" id="name" name="name">
+      </label> -->
+      <label for="address">Address
+        <input type="text" id="address" name="address">
+      </label>
+      <label for="date">Date
+        <input type="date" id="date" name="date">
+      </label>
+      <button class="btn" type="submit">Order</button>
+    </form>
+  </div>
+</div>
+
+
+
+
+  <div class="card-bg">
+    <img class="i3" src="/assets/images/ibg.jpg" />
+    <div class="txt">
+      <h1></h1>
+    </div>
+  </div>
+  <div class="choose">
+    <h1 class="capture">Choose Invitation Card</h1>
+    <p class="from">from</p>
+    <p class="logo">Celestial Celebration</p>
+    <!-- <a href="#invitation-card">
+      <button type="button" button name="btn1">Choose Invitation Card</button>
+    </a>
+    <p>from</p> -->
+    <!-- <h2>Celestial Celebration</h2> -->
+  </div> 
+  <div class="all">
+    <!-- <div class="cardd"> -->
+      <!-- <div class="container"> -->
+        <div class="divbouquet"></div>
+        <div class="card-nav">
+        
+          <div class="nav-left">
+            <p>Our Designer Wedding Cards</p>
+          </div>
+          <div class="nav-right">
+            <!-- <img class="img1" src="/assets/images/card.jpg" /> -->
+             <img class="img1" src="\assets\images\pau-patterson-photography-lxHHTpPfA4w-unsplash.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+    
+    <!-- <div class="divbouquet">
+      <div>
+        <p class="bouquetpara">Our Designer Wedding Cards</p>
+      </div>
+      <div>
+        <img class="img1" src="/assets/images/card.jpg" alt="" />
+      </div>
+    </div> -->
+    <div class="container3 grid-cols-3">
+      <% for (let i = 0 ; i < cards.length ; i++){ %>
+        <div class="cards">
+          <img class="b1" src="<%= cards[i].image %>" alt="" />
+          <div class="card-desc">
+            <h2 class="product-name"><%= cards[i].productname %></h2>
+            <p class="product-price"><%= cards[i].productprice %>$</p>
+            <button class="btn" onclick="placeOrder('<%= cards[i].ID %>' , '<%= cards[i].image %>')">Add to Cart</button>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+
+
+
+    <!-- <div class="cards">
+      <img class="img2" src="/assets/images/i1.jpg" />
+      <div class="card-desc">
+        <h2>Card 1</h2>
+        <p></p>
+        <button class="btn">Choose Card</button>
+      </div>
+    </div>
+    <div class="cards">
+      <img class="img2" src="/assets/images/i2.jpg" />
+      <div class="card-desc">
+        <h2>Card 2</h2>
+        <p></p>
+        <button class="btn">Choose card</button>
+      </div>
+    </div>
+    <div class="cards">
+      <img class="img2" src="/assets/images/i3.jpg" />
+      <div class="card-desc">
+        <h2>Card 3</h2>
+        <p></p>
+        <button class="btn">Choose Card</button>
+      </div>
+    </div> -->
+  <!-- </div> -->
+
+  <%- await include("../partials/footer"); %>
+</body>
+
+</html>

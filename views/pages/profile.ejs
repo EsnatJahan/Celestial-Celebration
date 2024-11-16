@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+  
+
+    <%- await include("../partials/sidebar"); %>
+    <% let [sessions] =  await db.query("SELECT * FROM session"); %>
+    <%
+        var token = req.cookies.token;
+        var user = null;
+        if(token){
+            for(let i = 0 ; i < sessions.length ;i++){
+            if(sessions[i].token==token) user = sessions[i].userName;
+            }
+        }
+     %>
+     <% let [userlist] = await db.query("SELECT * FROM userlist WHERE name = ?", user); %>
+     <% let [orders] = await db.query("SELECT * FROM orders WHERE username = ?", user); %>
+     <% let [confirmed_orders] = await db.query("SELECT * FROM confirmed_orders WHERE username = ?", user); %>
+     <script>
+      async function checkuser(order){  
+        console.log("11");
+      try{ 
+        console.log("123");
+          
+          console.log(order);
+          let response = await fetch("/api/delete", {
+               method: "POST",
+               headers: {
+               "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+               order,
+          }),
+          })
+          if(response.ok){
+             alert('Successfully Deleted');
+             window.location.assign('profile');
+          }else{
+             alert('Unsucessful Log In')
+          } 
+      } catch (e) {
+          console.error(e); // log the error
+      }
+  
+     }
+  
+    </script>
+
+
+
+
+
+    <div class="profile">
+        <button class="profile-pic">
+            <img class="profile-image" src="\assets\images\user (1).png" alt="">
+        </button>
+            <p class="profile-user"><%= user  %> <br></p>     
+                       
+            <!-- <p class="joindate"> joined at jan 5 </p> -->
+    </div>
+    <hr class="line">
+    <h2 style="padding-left: 2%;">Personal Information</h2> <br>
+  
+
+
+  <form action="" style="padding-left:5%; padding-right: 12%;">
+    <label for="name" style="color: brown; font-size:x-large;">Name: </label>
+    <label for="name" style="color: brown; font-size:x-large; padding-left: 39%;">Email: </label>
+    <br> 
+    <input type="button"  style="font-size: large; width: 40%;height: 30px;background-color: rgba(240, 248, 255, 0.874); border-bottom-color: cadetblue; border-right-color: cadetblue;  border-left: none; border-top: none; margin-right: 5%;" value="<%=userlist[0].firstname%>">
+    <input type="button" style="font-size: large;width: 40%;height: 30px; background-color: aliceblue; border-bottom-color: cadetblue; border-right-color: cadetblue;  border-left: none; border-top: none; " value="<%=userlist[0].email%>">
+    <br> <br> <br>
+    <label for="name" style="color: brown; font-size:x-large;">Phone: </label>
+    <label for="name" style="color: brown; font-size:x-large; padding-left: 39%;">Address: </label>
+    <br>
+    <input type="button"style="font-size: large; width: 40%;height: 30px;background-color: aliceblue; border-bottom-color: cadetblue; border-right-color: cadetblue;  border-left: none; border-top: none; margin-right: 5%;"  value="<%=userlist[0].phone%>">
+    <input type="button" style="font-size: large;width: 40%;height: 30px; background-color: aliceblue;border-bottom-color: cadetblue; border-right-color: cadetblue;  border-left: none; border-top: none;" value="<%=userlist[0].address%>">
+    <br> <br> <br>
+    <label for="name" style="color: brown; font-size:x-large; ">Password: </label>
+    <label for="name"style="color: brown; font-size:x-large; padding-left: 36%;">Role:  </label>
+    <br>
+    <input type="button"  style="font-size: large; width: 40%;height: 30px;background-color: aliceblue; border-bottom-color: cadetblue; border-right-color: cadetblue;  border-left: none; border-top: none; margin-right: 5%;" value="<%=userlist[0].password%>">
+    <% if(userlist.ID>10000) {%>
+    <input type="button"  style="font-size: large;width: 40%;height: 30px; background-color: aliceblue;border-bottom-color: cadetblue; border-right-color: cadetblue;  border-left: none; border-top: none;" value="User">
+    <% }else {%>
+    <input type="button"  style="font-size: large;width: 40%;height: 30px; background-color: aliceblue;border-bottom-color: cadetblue; border-right-color: cadetblue;  border-left: none; border-top: none;" value="Admin">
+    <% } %>
+    <br> <br>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div >
+      <h2 style="padding-left: 2%;">Pending Orders</h2>
+        <% for(let i = 0 ; i<orders.length ;i++) {
+            var productname;
+            if(orders[i].productID <=100){
+              let [venues] = await db.query("SELECT name FROM venues WHERE ID=?",orders[i].productID);
+              productname = venues[0].name;
+            }else if(orders[i].productID <=400 && orders[i].productID > 300 ){
+              let [gifts] = await db.query("SELECT productname FROM gifts WHERE ID=?",orders[i].productID); 
+              productname = gifts[0].productname;
+            }else if(orders[i].productID <=200 && orders[i].productID > 100 ){
+              let [cakes] = await db.query("SELECT productname FROM cakes WHERE ID=?",orders[i].productID);
+              productname =cakes[0].productname;
+            }else if(orders[i].productID <=300 && orders[i].productID > 200 ){
+              let [cards] = await db.query("SELECT productname FROM cards WHERE ID=?",orders[i].productID);
+              productname =cards[0].productname;
+            }
+            var [year] = await db.query("SELECT EXTRACT(YEAR FROM  ?) AS year",orders[i].orderDate);    
+            var [month] = await db.query("SELECT EXTRACT(Month FROM  ?) AS month",orders[i].orderDate);                
+            var [day] = await db.query("SELECT EXTRACT(DAY FROM  ?) AS day",orders[i].orderDate)
+            %>
+            <div class="pendings" style="padding-left: 4%;">
+                <p><span>Product name:</span>  <%=productname%> --- <span >Order date:</span><%=year[0].year%>/<%=month[0].month%>/<%=day[0].day%> --- 
+                <%if(orders[i].productID<=100) {%>
+                   <span > Slot:</span><%=orders[i].orderSlot%> 
+                <%}else{%>
+                   <span >Location:</span><%=orders[i].location%>
+                <%}%>   
+                </p>
+            </div>
+            <hr>
+        <%}%>
+        <% 
+        if(orders.length == 0 ){
+        %>
+        <h2 style="text-align: center;">No menu to show</h2> 
+        <%}%>
+
+    </div>
+      <h2 style="padding-left: 2%;">Confirmed Orders</h2>
+      <div class="confirm" ></div>
+        
+        <% for(var i = 0 ; i<confirmed_orders.length ;i++) {
+            var productname;
+            if(confirmed_orders[i].productID <=100){
+              let [venues] = await db.query("SELECT name FROM venues WHERE ID=?",confirmed_orders[i].productID);
+              productname = venues[0].name;
+            }else if(confirmed_orders[i].productID <=400 && confirmed_orders[i].productID > 300 ){
+              let [gifts] = await db.query("SELECT productname FROM gifts WHERE ID=?",confirmed_orders[i].productID); 
+              productname = gifts[0].productname;
+            }else if(confirmed_orders[i].productID <=200 && confirmed_orders[i].productID > 100 ){
+              let [cakes] = await db.query("SELECT productname FROM cakes WHERE ID=?",confirmed_orders[i].productID);
+              productname =cakes[0].productname;
+            }else if(confirmed_orders[i].productID <=300 && confirmed_orders[i].productID > 200 ){
+              let [cards] = await db.query("SELECT productname FROM cards WHERE ID=?",confirmed_orders[i].productID);
+              productname =cards[0].productname;
+            }
+
+            var [year] = await db.query("SELECT EXTRACT(YEAR FROM  ?) AS year",confirmed_orders[i].orderDate);    
+            var [month] = await db.query("SELECT EXTRACT(Month FROM  ?) AS month",confirmed_orders[i].orderDate);                
+            var [day] = await db.query("SELECT EXTRACT(DAY FROM  ?) AS day",confirmed_orders[i].orderDate)
+            
+            %>
+            <div class="pendings" style="padding-left: 4%;">
+                <p><span>Product name:</span>  <%=productname%> --- <span >Order date:</span><%=year[0].year%>/<%=month[0].month%>/<%=day[0].day%> --- 
+                <%if(confirmed_orders[i].productID<=100) {%>
+                   <span > Slot:</span><%=confirmed_orders[i].orderSlot%>
+                <%}else{%>
+                   <span >Location:</span><%=confirmed_orders[i].location%>
+                <%}%>
+                </p>
+                <button class="clear-button" onclick="checkuser('<%= confirmed_orders[i].orderID %>')"><i class="fa-solid fa-trash"></i></button>
+            </div>            
+            <hr>
+        <%}%>
+        <% 
+        if(confirmed_orders.length === 0 ){
+        %>
+           <h2 style="text-align: center;">No menu to show</h2>
+        <%}%>
+    </div>
+    <%- await include("../partials/footer"); %>
+</body>
+</html>

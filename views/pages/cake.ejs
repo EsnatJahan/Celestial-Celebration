@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/cakes.css" />
+  <title><%= title %></title>
+</head>
+
+<body>
+  <%- await include("../partials/sidebar"); %>
+
+  <% 
+    let [cakes]=await db.query("SELECT * FROM cakes");
+   %>
+
+  <script>
+    var order_cake_id = null;
+    async function give_orders(order_cake_id, address, date) {
+      // console.log(order_cake_id);
+      try {
+        let response = await fetch("/api/customer-order", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            order_id: order_cake_id,
+            address,
+            date,
+          }),
+        })
+        if (response.ok) {
+          //  console.log("123");
+          alert("Order confirmed");
+        }
+      } catch (e) {
+        console.error(e); // log the error
+      }
+
+    }
+
+
+    function placeOrder(id, image) {
+      $('#order-menu').removeClass("disabled");
+      $('#imagecontainer').attr('src', image);
+      order_cake_id = id;
+    }
+
+    function handleOrderSubmit(e) {
+      // let name = $('#name').val();
+      let address = $('#address').val();
+      let date = $('#date').val();
+      e.preventDefault();
+      // console.log(order_cake_id, name, address, date,time);
+
+      give_orders(order_cake_id, address, date);
+
+
+      order_cake_id = null;
+      $('#order-menu').addClass("disabled");
+      return false;
+    }
+    $(document).ready(() => {
+      $('#order-menu').addClass("disabled");
+      $('.overlay-background').click(() => {
+        order_cake_id = null;
+        $('#order-menu').addClass("disabled");
+      })
+    })
+  </script>
+
+  <div id="order-menu" class="disabled">
+    <div class="overlay-background"></div>
+    <div class="overlay-form">
+
+      <form onsubmit="return handleOrderSubmit(event)">
+        <img id="imagecontainer" class="order_image">
+        <!-- <label for="name">Name
+          <input type="text" id="name" name="name">
+        </label> -->
+        <label for="address">Address
+          <input type="text" id="address" name="address">
+        </label>
+        <label for="date">Date
+          <input type="date" id="date" name="date">
+        </label>
+        <button class="btn" type="submit">Order</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="giftclass">
+    <img class="gift" src="\assets\images\Screenshot 2024-06-13 004449.png" alt="" />
+    <div class="txt">
+      <!-- <h1>We Give The Best to Make Your Day</h1> -->
+    </div>
+  </div>
+
+  <div class="call-for-action">
+    <h1 class="capture">Celebrate Your Special Day</h1>
+    <p class="from">with</p>
+    <p class="logo">Celestial Celebration</p>
+    <p class="para2">
+      for latest update and stay connected with us visit our facebook page:
+      <a href="https://www.youtube.com" target="_blank">
+        <!-- <i class="fa-brands fa-youtube youtube-icon"></i>youtube -->
+        <i class="fa-brands fa-facebook facebook-icon"></i> facebok
+      </a>
+    </p>
+  </div>
+
+  <!--<button class="btn">Order Now</button>-->
+  <% if(false){ %>
+  <div class="search-box">
+    <!-- <i class="fa-search"></i> -->
+    <div class="row">
+      <input type="text" id="input-box" onkeyup="myFunction()" placeholder="Search.." autocomplete="off">
+      <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+    <div class="result-box">
+      <!-- <ul>
+        <li>Chocolate flavor</li>
+        <li>Vanila flavor</li>
+      </ul> -->
+    </div>
+  </div>
+  <script src="/js/autocomplete.js"></script>
+ <% } %>
+  <div class="all">
+    <div class="divbouquet">
+      <div>
+        <p class="bouquetpara">Customizing Cake to make your day more</p>
+        <p class="bouquetpara2">Memorable & Enjoyable</p>
+      </div>
+      <div>
+        <img class="bouquet" src="/assets/images/yulia-khlebnikova--oerSfHWIF8-unsplash.jpg" alt="" />
+      </div>
+    </div>
+    <div class="container3 grid-cols-3">
+      <% for (let i = 0 ; i < cakes.length ; i++){ %>
+      <div class="card">
+        <img class="b1" src="<%= cakes[i].image %>" alt="" />
+        <div class="card-desc">
+          <h2 class="product-name"><%= cakes[i].productname %></h2>
+          <p class="product-price"><%= cakes[i].productprice %>$</p>
+          <button class="btn" onclick="placeOrder('<%= cakes[i].ID %>' , '<%= cakes[i].image %>')">Add to Cart</button>
+        </div>
+      </div>
+      <% } %>
+
+    </div>
+  </div>
+
+  <%- await include("../partials/footer"); %>
+</body>
+
+</html>

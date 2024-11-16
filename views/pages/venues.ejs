@@ -1,0 +1,217 @@
+<html>
+
+<head>
+  <title><%= title %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/venues.css" />
+
+  <script>
+    async function add_booking(venue_id, time_from, time_to) {
+      try {
+        await fetch("/api/add_venue_booking", {
+        // await fetch("/api/customer-order", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            venue_id,
+            time_from,
+            time_to,
+            booking_date: $("#date_select")[0].value,
+          }),
+        })
+        if(response.ok){
+          console.log("123");
+          alert("Order Confirmed");         
+        }
+        update_venue_availability();
+        
+      } catch (e) {
+        console.error(e); // log the error
+      }
+    }
+    async function update_venue_availability() {
+      try {
+        let bookings = await fetch(`/api/venue_bookings?date=${$("#date_select")[0].value}`); // fetch the data from the server
+        bookings = await bookings.json(); // convert the data to json
+        console.log(bookings);
+        // clear previous disabled classes and attributes
+        let venues = $(`#venues`); // get the venue element
+        for (let venue of venues) {
+          let time_slot = $(venue).find(`.time-slot`); // get the time slot element
+          for (let slot of time_slot) {
+            $(slot).removeClass("disabled");
+            $(slot).find('button').removeAttr('disabled');
+          }
+        }
+        // loop through bookings and disable the time slots
+        for (let booking of bookings) {
+          let venue = $(`#venues-${booking.productID}`); // get the venue element
+          let time_slot = venue.find(`.time-slot`); // get the time slot element
+          if (booking.orderSlot === "10:00") {
+            time_slot.eq(0).addClass("disabled"); // add the disabled class to the time slot
+            time_slot.eq(0).find('button').attr('disabled', true); // disable the button
+          } else if (booking.orderSlot === "15:00") {
+            time_slot.eq(1).addClass("disabled"); // add the disabled class to the time slot
+            time_slot.eq(1).find('button').attr('disabled', true); // disable the button
+          } else if (booking.orderSlot === "19:00") {
+            time_slot.eq(2).addClass("disabled"); // add the disabled class to the time slot
+            time_slot.eq(2).find('button').attr('disabled', true); // disable the button
+          }
+        }
+      } catch (e) {
+        console.error(e); // log the error
+      }
+    }
+
+    function onDateChange() {
+      update_venue_availability();
+    }
+    $('document').ready(() => {
+      // runs when the the following code once the page has been loaded
+      update_venue_availability(); // run the update_venue_availability function
+      $("#date_select").change(update_venue_availability); // when the date input changes, run the onDateChange function
+    });
+  </script>
+
+</head>
+
+<% 
+  function date_add(date, days) {
+    let result = new Date(date);
+    let time = result.getTime();
+    time += days * 24 * 60 * 60 * 1000;
+    result.setTime(time);
+    return result.toISOString().split('T')[0];
+  }
+  let [venues] = await db.query("SELECT * FROM venues");
+  let [venue_image] = await db.query("SELECT * FROM venue_images");
+  let today = new Date().toISOString().split('T')[0]
+  let today_plus_5 = date_add(today, 5);
+  let date = req.query.date || today
+  let [venue_bookings] = await db.query("SELECT * FROM venue_bookings WHERE booking_date = ? ORDER BY booking_date ASC", date);
+%>
+
+<body>
+  <%- await include("../partials/sidebar"); %>
+  <div class="venue-bg">
+    <img class="i3" src="/assets/images/venuebg.jpg" />
+    <div class="txt">
+      <h1>Choose Venue For Your Occasion</h1>
+    </div>
+  </div>
+  <div class="choose">
+    <a href="#venue-card">
+      <button type="button" button name="btn">Choose Venue</button>
+    </a>
+    <p>from</p>
+    <h2>Celestial Celebration</h2>
+  </div>
+  <div class="pic">
+    <div class="left">
+      <img src="/assets/images/v1.jpg" alt="" />
+    </div>
+    <div class="right">
+      <div class="right-top">
+        <img src="/assets/images/v2.jpg" alt="" />
+      </div>
+      <div class="right-bottom">
+        <img src="/assets/images/v3.jpg" alt="" />
+      </div>
+    </div>
+    <div class="left">
+      <img src="\assets\images\arion-reyvonputra-oSfJCqCbRmc-unsplash.jpg" alt="" />
+    </div>
+  </div>
+  <div class="venue">
+    <div class="container">
+      <div class="venue-nav">
+        <div class="nav-left">
+          <p>Our Most Attractive Wedding Venues</p>
+        </div>
+        <div class="nav-right">
+          <img class="img1" src="/assets/images/venue3.jpg" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="venuelist">
+    <!-- <input type="datetime-local" value="2024-08-12T13:23" min="2024-08-12T14:23" max="2024-08-14T15:25"> -->
+    <input id="date_select" type="date" value="<%=date%>" min="<%=today%>" max="<%=today_plus_5%>">
+    <% for (let i = 0 ; i<venues.length-1; i++) {%>
+
+    <div id="venues">
+      <div class="card" id="venues-<%=venues[i].ID%>">
+        <div class="container3 grid-cols-3">
+          <% for (let j = 0; j < venue_image.length; j++) {
+           if (venues[i].ID == venue_image[j].venue_id){ %>
+          <img class="img2" src="<%= venue_image[j].images  %>" alt="" />
+          <% }} %>
+        </div>
+
+        <div class="card-desc">
+          <h2><%= venues[i].name %></h2>
+          <h3><%= venues[i].location %></h3>
+          <p><%= venues[i].description %></p>
+          <div class="align-center">
+            <h3 class="display-inline">Available Slots: </h3>
+          </div>
+
+          <div class="time-slot-div">
+            <div class="time-slot">
+              <h3>10:00 AM - 01:00 PM</h3>
+              <button class="btn" onClick="add_booking('<%=venues[i].ID%>', '10:00', '13:00')">Book Now</button>
+            </div>
+            <div class="time-slot">
+              <h3>03:00 PM - 06:00 PM</h3>
+              <button class="btn" onClick="add_booking('<%=venues[i].ID%>', '15:00', '18:00')">Book Now</button>
+            </div>
+            <div class="time-slot">
+              <h3>07:00 AM - 10:00 PM</h3>
+              <button class="btn" onClick="add_booking('<%=venues[i].ID%>', '19:00', '22:00')">Book Now</button>
+            </div>
+          </div>
+          <% if (false) {// disable this section  basically commenting out this section of code%>
+          <div class="align-center">
+
+            <% for (let j = 0; j < venue_bookings.length; j++) {
+                if (venues[i].ID == venue_bookings[j].venue_id){ 
+                  if(j==0){
+                    var [start] = await db.query("SELECT DATE_ADD(CURDATE() , INTERVAL 1 DAY) AS time");
+                  }else{ 
+                    var [start] = await db.query("SELECT DATE_ADD(?, INTERVAL 1 DAY) AS time",venue_bookings[j-1].booking_date); 
+                  }
+                  let [end] = await db.query("SELECT DATE_SUB(?, INTERVAL 1 DAY) AS time",venue_bookings[j].booking_date);
+    
+                  var [start_year] = await db.query("SELECT EXTRACT(YEAR FROM  ?) AS start_year",start[0].time);          
+                  var [start_day] = await db.query("SELECT EXTRACT(DAY FROM  ?) AS start_day",start[0].time)
+                  var [start_month]= await db.query("SELECT DATE_FORMAT(?, '%m') AS start_month",start[0].time) ;    
+                  var [end_year] = await db.query("SELECT EXTRACT(YEAR FROM  ?) AS end_year",end[0].time);          
+                  var [end_day] = await db.query("SELECT EXTRACT(DAY FROM  ?) AS end_day",end[0].time)
+                  var [end_month]= await db.query("SELECT DATE_FORMAT(?, '%m') AS end_month",end[0].time) ;
+                 %>
+            <input class="calender" type="date" min="<%=start_year[0].start_year%>-<%=start_month[0].start_month%>-<%=start_day[0].start_day%>" max="<%=end_year[0].end_year%>-<%=end_month[0].end_month%>-<%=end_day[0].end_day%>" />
+            <p class="display-inline"><%=start_year[0].start_year%>-<%=start_month[0].start_month%>-<%=start_day[0].start_day%> to <%=end_year[0].end_year%>-<%=end_month[0].end_month%>-<%=end_day[0].end_day%></p>
+            <br />
+            <% }  }%>
+
+          </div>
+          <button class="btn">Add to Cart</button>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+
+  <%- await include("../partials/footer"); %>
+</body>
+
+</html>

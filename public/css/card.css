@@ -1,0 +1,157 @@
+@import url("base.css");
+
+.gift {
+  width: 100%;
+  margin-top: 0;
+  padding-bottom: 40px;
+}
+
+.from {
+  font-style: italic;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: x-large;
+}
+
+.logo {
+  font-size: xx-large;
+  font-style: italic;
+  text-align: center;
+}
+
+.capture{
+    align-content: center;
+    padding-left: 37%;
+}
+
+.para2 {
+  /*  margin-left: 32%;*/
+  margin-top: 10px;
+  font-size: x-large;
+  font-style: italic;
+}
+
+.call-for-action {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container3 {
+  display: grid;
+  width: 93%;
+  padding: 0 5%;
+  /* grid-row: 1fr 1fr; */
+  grid-template-rows: auto;
+  justify-content: center;
+  gap: 30px;
+  margin: auto;
+  padding-top: 30px;
+}
+
+.b1 {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.i3{
+    width: 100%;
+    height: 40vh;
+    margin-top: 0;
+    padding-bottom: 40px;
+ }
+
+
+.orderdate {
+  height: 100px;
+  background-color: bisque;
+  margin: auto;
+}
+
+#order-menu.disabled {
+  display: none;
+}
+
+#order-menu .overlay-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+.overlay-form {
+  position: fixed;
+  top: 5%;
+  left: 25%;
+  right: 25%;
+  bottom: 5%;
+  background: rgba(255, 255, 255);
+  z-index: 101;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 1.5rem; 
+} 
+
+.overlay-form form {
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  height: 100%;
+  gap: 2px;
+}
+
+.overlay-form form input {
+  width: 70%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.order_image{
+  /* top: 8%; */
+  height : 70%;
+  width: 90%;
+  margin: 2px;
+  border: 5px;
+  border-color: blue;
+}
+
+
+.cardd{
+    /* background-color: rgb(148, 148, 160); */
+    padding: 10px 0;
+    margin: 15px;
+ } 
+ .cardd.container{
+     width: 1140px;
+     margin: auto;
+ }
+
+.card-nav{
+  background-color: rgb(228, 216, 228);
+  background-color: rgb(232, 193, 232); 
+
+  display: flex;
+  justify-content: end;
+}
+.card-nav .nav-right .img1{
+    height: 180px;
+    width: 250px;
+    
+}
+
+.card-nav .nav-left p{
+    padding-top: 15%;
+    text-align: center;
+    font-size: 36px;
+    font-style: italic;
+    
+}

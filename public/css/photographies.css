@@ -1,0 +1,135 @@
+@import url("base.css");
+
+.header {
+ background-image: url(/assets/images/p9.png);
+  height: 35vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat; 
+}
+.call-for-action {
+  padding-top: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* font-style: italic; */
+}
+
+.capture {
+  font-style: italic;
+}
+
+.from {
+  font-style: italic;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: x-large;
+}
+
+.logo {
+  font-size: xx-large;
+  font-style: italic;
+  text-align: center;
+}
+.para2 {
+  padding: 2%;
+  text-align: center;
+  font-size: x-large;
+  /* font-style: italic; */
+}
+
+
+.gift {
+  display: inline-block;
+  width: 100%;
+  height: 90%;
+  padding-top: 10%;
+  object-fit: cover;
+
+  &:hover {
+    scale: 1.05;
+    transition: scale 0.2s ease-in-out;
+  }
+}
+
+.gift2 {
+  /*  height: 650px; */
+  display: inline-block;
+  width: 100%;
+  height: 95%;
+  object-fit: cover;
+
+  &:hover {
+    scale: 1.05;
+    transition: scale 0.2s ease-in-out;
+  }
+}
+
+.gift3 {
+  width: 100%;
+  margin-top: 0;
+  padding-bottom: 40px;
+}
+
+.giftdiv {
+  margin: 20px 10% 50px;
+}
+
+.container {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 32% 33% 32%;
+  justify-items: center;
+}
+
+.button1 {
+  display: block;
+  text-align: center;
+  /* position: relative; */
+  background-color: #91bd91;
+  height: 50px;
+  width: 200px;
+  margin: 15px auto;
+  font-size: xx-large;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    cursor: pointer;
+    scale: 1.1;
+    transition: scale 0.1s ease-in-out;
+  }
+}
+
+
+/* .giftclass {
+} */
+
+/* .giftclass img {
+} */
+
+.txt {
+  text-align: center;
+  position: absolute;
+  top: 2%;
+  width: 100%;
+  color: black;
+  margin: auto;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.info {
+  font-size: larger;
+  font-weight: 200;
+  text-align: center;
+}
+
+.footer {
+  height: 100px;
+}

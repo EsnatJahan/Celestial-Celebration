@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Error</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        color: #b33;
+        background: #f4f4f4;
+        padding: 20px;
+        text-align: center;
+        margin: 0;
+      }
+      h2 {
+        color: #333;
+        background: #f4f4f4;
+        padding: 10px;
+        text-align: center;
+        margin: 0;
+      }
+      pre {
+        background: #f4f4f4;
+        padding: 10px;
+        margin: 0;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        min-height: 100vh;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1><%= message %></h1>
+      <h2><%= error.status %></h2>
+      <pre><%= error.stack %></pre>
+    </div>
+  </body>
+</html>

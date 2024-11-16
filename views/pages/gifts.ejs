@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/gifts.css" />
+  <title><%= title %></title>
+</head>
+
+<body>
+  <%- await include("../partials/sidebar"); %>
+  <% 
+    let [gifts]=await db.query("SELECT * FROM gifts");
+   %>
+
+  <script>
+    var order_cake_id = null;
+    async function give_orders(order_cake_id, address, date) {
+      // console.log(order_cake_id);
+      try {
+        let response = await fetch("/api/customer-order", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            order_id: order_cake_id,
+            address,
+            date,
+          }),
+        })
+        if(response.ok){
+      //  console.log("123");
+        alert("Order confirmed");
+        }
+      } catch (e) {
+        console.error(e); // log the error
+      }
+      
+    }
+    
+
+    function placeOrder(id , image) {
+      $('#order-menu').removeClass("disabled");
+      $('#imagecontainer').attr('src', image);
+      order_cake_id = id ;
+    }
+
+    function handleOrderSubmit(e) {
+      // let name = $('#name').val();
+      let address = $('#address').val();
+      let date = $('#date').val();
+      e.preventDefault();
+     // console.log(order_cake_id, name, address, date,time);
+
+      give_orders(order_cake_id, address, date);
+
+
+      order_cake_id = null;
+      $('#order-menu').addClass("disabled");
+      return false;
+    }
+    $(document).ready(() => {
+      $('#order-menu').addClass("disabled");
+      $('.overlay-background').click(() => {
+        order_cake_id = null;
+        $('#order-menu').addClass("disabled");
+      })
+    })
+  </script>
+
+  <div id="order-menu" class="disabled">
+    <div class="overlay-background"></div>
+    <div class="overlay-form">
+      
+      <form onsubmit="return handleOrderSubmit(event)">
+        <img  id="imagecontainer"  class="order_image">
+        <!-- <label for="name">Name
+          <input type="text" id="name" name="name">
+        </label> -->
+        <label for="address">Address
+          <input type="text" id="address" name="address">
+        </label>
+        <label for="date">Date
+          <input type="date" id="date" name="date">
+        </label>
+        <button class="btn" type="submit">Order</button>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="giftclass">
+    <img class="gift3" src="/assets/images/image.png" alt="" />
+    <div class="txt">
+      <h1>Personalized Gift For Everyone</h1>
+    </div>
+  </div>
+
+  <div class="call-for-action">
+    <button class="btn">Shop Now</button>
+    <p class="from">from</p>
+    <p class="logo">Celestial Celebration</p>
+  </div>
+
+  <div class="giftdiv">
+    <div class="container">
+      <div>
+        <img class="gift" src="/assets/images/marissa-grootes-D4jRahaUaIc-unsplash.jpg" alt="" />
+      </div>
+      <div class="container2">
+        <div>
+          <img class="gift2" src="/assets/images/wedding-dreamz-XsriYQ1oowc-unsplash.jpg" alt="" />
+        </div>
+        <div>
+          <img class="gift2" src="/assets/images/wijdan-mq-H5yiRXDUkto-unsplash.jpg" alt="" />
+        </div>
+      </div>
+
+      <div>
+        <img class="gift" src="/assets/images/broberta-pgW0cB9ALJ8-unsplash.jpg" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="all">
+    <div class="divbouquet">
+      <div>
+        <p class="bouquetpara">
+          Customizing bouquet for birthday wedding party
+        </p>
+        <p class="bouquetpara2">for your close one</p>
+      </div>
+      <div>
+        <img class="bouquet" src="/assets/images/Screenshot 2024-03-25 223316.png" alt="" />
+      </div>
+    </div>
+
+    <div class="container3 grid-cols-3">
+      <% for (let i = 0 ; i < 6 ; i++){ %>
+        <div class="card">
+          <img class="b1" src="<%= gifts[i].image %>" alt="" />
+          <div class="card-desc">
+            <h2 class="product-name"><%= gifts[i].productname %></h2>
+            <p class="product-price"><%= gifts[i].productprice %>$</p>
+            <button class="btn" onclick="placeOrder('<%= gifts[i].ID %>' , '<%= gifts[i].image %>')">Add to Cart</button>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="all">
+    <div class="divbouquet">
+      <div>
+        <p class="bouquetpara">Customizing birthday gift for children</p>
+      </div>
+      <div>
+        <!-- <img class="bouquet" src="/assets/images/seyedeh-hamideh-kazemi-Y4DNR1dyEKE-unsplash.jpg" alt="" /> -->
+        <img class="bouquet" src="\assets\images\pixel-bee-ISD-UTh15AE-unsplash.jpg" alt="">
+      </div>
+    </div>
+
+    <div class="container3 grid-cols-3">
+      <% for (let i = 6 ; i < 9 ; i++){ %>
+        <div class="card">
+          <img class="b1" src="<%= gifts[i].image %>" alt="" />
+          <div class="card-desc">
+            <h2 class="product-name"><%= gifts[i].productname %></h2>
+            <p class="product-price"><%= gifts[i].productprice %>$</p>
+            <button class="btn" onclick="placeOrder('<%= gifts[i].ID %>' , '<%= gifts[i].image %>')">Add to Cart</button>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <%- await include("../partials/footer"); %>
+</body>
+
+</html>

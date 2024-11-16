@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/formate.css" />
+</head>
+<body>
+  <% 
+  let [venues] = await db.query("SELECT * FROM venues");
+  let [venue_image] = await db.query("SELECT * FROM venue_images");
+  let [venue_bookings] = await db.query("SELECT * FROM venue_bookings");
+  
+%>
+
+<div class="venuelist">
+<% for (let i = 0 ; i<venues.length; i++) {%>
+  
+  <div class="card">
+    <div class="container3 grid-cols-3">
+      <% for (let j = 0; j < venue_image.length; j++) {
+       if (venues[i].ID == venue_image[j].venue_id){ %>
+        <img class="img2" src="<%= venue_image[j].images  %>" alt="" /> 
+      <% }} %>
+    </div>
+    
+    <div class="card-desc">
+      <h2><%= venues[i].name %></h2>
+        <h3><%= venues[i].location %></h3>
+        <p><%= venues[i].description %></p>
+        <div class="align-center"><h3 class="display-inline">Available Slots: </h3></div>
+        <div class="align-center">   
+         
+          <% for (let j = 0; j < venue_bookings.length; j++) {
+            if (venues[i].ID == venue_bookings[j].venue_id){ 
+              if(j==0){
+                var [start] = await db.query("SELECT DATE_ADD(CURDATE() , INTERVAL 1 DAY) AS time");
+              }else{ 
+                var [start] = await db.query("SELECT DATE_ADD(?, INTERVAL 1 DAY) AS time",venue_bookings[j-1].booking_date); 
+              }
+              let [end] = await db.query("SELECT DATE_SUB(?, INTERVAL 1 DAY) AS time",venue_bookings[j].booking_date);
+
+              var [start_year] = await db.query("SELECT EXTRACT(YEAR FROM  ?) AS start_year",start[0].time);          
+              var [start_day] = await db.query("SELECT EXTRACT(DAY FROM  ?) AS start_day",start[0].time)
+              var [start_month]= await db.query("SELECT DATE_FORMAT(?, '%m') AS start_month",start[0].time) ;
+
+              var [end_year] = await db.query("SELECT EXTRACT(YEAR FROM  ?) AS end_year",end[0].time);          
+              var [end_day] = await db.query("SELECT EXTRACT(DAY FROM  ?) AS end_day",end[0].time)
+              var [end_month]= await db.query("SELECT DATE_FORMAT(?, '%m') AS end_month",end[0].time) ;
+             %> 
+              <input class="calender" type="date"   min="<%=start_year[0].start_year%>-<%=start_month[0].start_month%>-<%=start_day[0].start_day%>" max="<%=end_year[0].end_year%>-<%=end_month[0].end_month%>-<%=end_day[0].end_day%>"   min="2024-05-25" max="2024-05-27" />
+              
+              <p class="display-inline"><%= start[0].time %> - <%= end[0].time  %></p>
+              <br/>
+          <% }  }%>
+            
+        </div>
+        <button class="btn">Add to Cart</button>
+      
+      
+    </div>
+  </div>
+  
+  
+<% } %> 
+
+<div class="venue-card" id="venue-card">
+    <% for (let i = 0; i < venues.length; i++ ) { %>
+    <div class="card">
+      <!-- <% if (venues[i].title_image.length > 0) { %> -->
+      <img class="img2" src="<%= venues[i].title_image %>" />
+      <!-- <% } %> -->
+      <div class="card-desc">
+        <h2><%= venues[i].name %></h2>
+        <h3><%= venues[i].location %></h3>
+        <p><%= venues[i].description %></p>
+        <div class="align-center">
+          <h3 class="display-inline">Open: </h3>
+          <p class="display-inline"><%= venues[i].open_from %> - <%= venues[i].open_to %></p>
+        </div>
+        <button class="btn">Book</button>
+      </div>
+    </div>
+    <% } %>
+  </div>
+
+
+
+</div>
+
+
+
+    
+</body>
+</html>
+
+
+

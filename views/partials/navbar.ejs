@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="/css/navbar.css" />
+<% let [sessions] =  await db.query("SELECT * FROM session"); %>
+<% var token = req.cookies.token;%>
+
+<div class="header">
+    <div class="nav-bar">
+      <div class="container">
+        <div class="nav-left">
+          <img src="/assets/images/logo.png" alt />
+        </div>
+        <div class="nav-right">
+          <ul  style="list-style-type: none;">
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">About US</a>
+            </li>
+            <li>
+              <a href="#">FAQ</a>
+            </li>
+            <li>
+              <% if(!token) {%>
+                <a href="login">Login</a>
+              <% }else{ %>  
+                <a href="api/logout">Log Out</a>
+              <% } %>
+            </li>
+            <li>
+              <a href="signup">Register</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>

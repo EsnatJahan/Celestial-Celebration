@@ -1,0 +1,31 @@
+{
+  "name": "celestial-celebration",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "www": "node ./bin/www",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cookies": "^0.9.1",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "http-errors": "^2.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.9.7",
+    "uuid4": "^2.0.3"
+  },
+  "devDependencies": {
+    "connect-livereload": "^0.6.1",
+    "livereload": "^0.9.3",
+    "nodemon": "^3.1.0"
+  }
+}

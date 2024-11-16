@@ -1,0 +1,130 @@
+@import url("base.css");
+
+.call-for-action {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.from {
+  font-style: italic;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: x-large;
+}
+.gift {
+  height: 520px;
+  width: 420px;
+  display: inline-block;
+  padding: 7px;
+}
+.gift2 {
+  height: 250px;
+  display: inline-block;
+}
+.gift3 {
+  width: 100%;
+  margin-top: 0;
+  padding-bottom: 40px;
+}
+.giftdiv {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.container {
+  display: grid;
+  padding: 0 5%;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  gap: 10px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.container2 {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.txt {
+  text-align: center;
+  position: absolute;
+  top: 4%;
+  width: 100%;
+  color: black;
+  margin: auto;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.logo {
+  font-size: xx-large;
+  font-style: italic;
+  text-align: center;
+}
+
+.footer {
+  height: 100px;
+}
+.orderdate {
+  height: 100px;
+  background-color: bisque;
+  margin: auto;
+}
+
+#order-menu.disabled {
+  display: none;
+}
+
+#order-menu .overlay-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+.overlay-form {
+  position: fixed;
+  top: 2%;
+  left: 25%;
+  right: 25%;
+  bottom: 5%;
+  background: rgba(255, 255, 255);
+  z-index: 101;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 1.5rem; 
+} 
+
+.overlay-form form {
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  height: 100%;
+  gap: 2px;
+}
+
+.overlay-form form input {
+  width: 70%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.order_image{
+  /* top: 8%; */
+  height : 70%;
+  width: 90%;
+  margin: 2px;
+  border: 5px;
+  border-color: blue;
+}

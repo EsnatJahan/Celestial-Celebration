@@ -1,0 +1,192 @@
+<html>
+
+<head>
+  <title><%= title %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/home.css" />
+</head>
+
+<body>
+  <% let [sessions] =  await db.query("SELECT * FROM session"); %>
+  <% var token = req.cookies.token;%>
+  <%- await include("../partials/sidebar"); %>
+  <div class="header">
+    <div class="nav-bar">
+      <div class="container">
+        <div class="nav-left">
+          <img src="/assets/images/logo.png" alt />
+        </div>
+        <div class="nav-right">
+          <ul>
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">About US</a>
+            </li>
+            <li>
+              <a href="#">FAQ</a>
+            </li>
+            <li>
+              <% if(!token) {%>
+                <a href="login">Login</a>
+              <% }else{ %>  
+                <a href="api/logout">Log Out</a>
+              <% } %>
+            </li>
+            <li>
+              <a href="signup">Register</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="functions">
+    <div class="container">
+      <div class="services">
+        <h1>Services We Provide</h1>
+        <div class="s-top">
+          <div class="cake">
+            <img src="/assets/images/cake1.jpg" alt width="100%" />
+            <h6>Meet bakers and set up tastings</h6>
+
+            <div class="cake-btn">
+              <a href="cake">
+                <button type="button" name="button">BROWSE CAKES</button>
+              </a>
+            </div>
+          </div>
+          <div class="gift">
+            <img src="/assets/images/flower1.jpg" alt width="90%" />
+            <h6>See different types of event gifts</h6>
+            <div class="gift-btn">
+              <a href="gifts">
+                <button type="button" name="button">SEE GIFTS</button>
+              </a>
+            </div>
+          </div>
+          <div class="cardd">
+            <img src="/assets/images/card.jpg" alt width="100%" />
+            <h6>Various types of cards</h6>
+            <div class="gift-btn">
+              <a href="cards">
+                <button type="button" name="button">VARIOUS CARDS</button>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="s-bottom">
+          <div class="venue">
+            <img src="/assets/images/venue2.jpg" alt width="100%" />
+            <h6>Outdoor spaces</h6>
+            <div class="venue-btn">
+              <a href="venues">
+                <button type="button" name="button">SEE VENUES</button>
+              </a>
+            </div>
+          </div>
+          <div class="photographer">
+            <img src="/assets/images/photographer.jpg" alt width="100%" />
+            <h6>Browse galleries to find your look</h6>
+            <div class="p-btn">
+              <a href="photography">
+                <button type="button" name="button">SEE PHOTOGRAPHERS</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="vendor">
+            <div class="container">
+                <div class="vendor-1">
+                    <h1>Build Your Vendor Team</h1>
+                    <div class="v-top">
+                        <div class="beauty">
+                          <a href="#">
+                            <button type="button" name="button" >BEAUTY</button>
+                          </a>
+                        </div>
+                        <div class="salon">
+                            <a href="#">
+                                <button type="button" name="button" >BRIDAL SALONS</button>
+                            </a>
+                         </div>
+                         <div class="caterar">
+                             <a href="#">
+                                    <button type="button" name="button" >CATERARS</button>
+                             </a>
+                        </div>
+                    </div>
+                    <div class="v-middle">
+                        <div class="planner">
+                            <a href="#">
+                                <button type="button" name="button">WEDDING PLANNERS</button>
+                            </a>
+                        </div>
+                        <div class="transport">
+                           <a href="#">
+                              <button type="button" name="button">TRANSPORTATION</button>
+                           </a>
+                        </div>
+                    </div>
+                    <div class="v-bottom">
+                        <div class="florist">
+                            <a href="#">
+                                <button type="button" name="button">FLORISTS</button>
+                            </a>
+                        </div>
+                        <div class="video">
+                            <a href="./pages/photographer.html">
+                                <button type="button" name="button">VIDEOGRPHAERS</button>
+                            </a>
+                        </div>
+                        <div class="place">
+                            <a href="./pages/venue.html">
+                                <button type="button" name="button">VENUES</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     -->
+
+  <div class="giftdiv">
+    <div class="containerx">
+      <div>
+        <img class="gift11" src="/assets/images/enmanuel-betances-santos-Xxe37tN-Rcs-unsplash.jpg" alt="" />
+      </div>
+      <div>
+        <img class="gift22" src="/assets/images/junior-reis-xMDo8y776uE-unsplash.jpg" alt="" />
+      </div>
+      <div>
+        <img class="gift11" src="/assets/images/joel-overbeck-fGPGd9PFd3w-unsplash.jpg" alt="" />
+      </div>
+      <div>
+        <img class="gift22" src="/assets/images/ariel-domenden-3Ki7QC0jVEg-unsplash.jpg" alt="" />
+      </div>
+
+      <div>
+        <img class="gift11" src="/assets/images/katie-rosario-QNyRp21hb5I-unsplash.jpg" alt="" />
+      </div>
+
+      <div class="content">
+        <img class="giftlogo" src="/assets/images/logo_transparent.png" alt="" />
+        <h3 class="bouquetpara">Order for Celebration</h3>
+        <!--<p class="bouquetpara2">Celebration</p>-->
+      </div>
+    </div>
+  </div>
+
+  <%- await include("../partials/footer"); %>
+</body>
+
+</html>

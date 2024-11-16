@@ -1,0 +1,146 @@
+@import url("base.css");
+
+.gift {
+  width: 100%;
+  margin-top: 0;
+  padding-bottom: 40px;
+}
+
+.from {
+  font-style: italic;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: x-large;
+}
+
+.logo {
+  font-size: xx-large;
+  font-style: italic;
+  text-align: center;
+}
+
+.para2 {
+  /*  margin-left: 32%;*/
+  margin-top: 10px;
+  font-size: x-large;
+  /* font-style: italic; */
+}
+
+.call-for-action {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.orderdate {
+  height: 100px;
+  background-color: bisque;
+  margin: auto;
+}
+
+#order-menu.disabled {
+  display: none;
+}
+
+#order-menu .overlay-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+.overlay-form {
+  position: fixed;
+  top: 5%;
+  left: 25%;
+  right: 25%;
+  bottom: 5%;
+  background: rgba(255, 255, 255);
+  z-index: 101;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 1.5rem; 
+} 
+
+.overlay-form form {
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  height: 100%;
+  gap: 2px;
+}
+
+.overlay-form form input {
+  width: 70%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.order_image{
+  /* top: 8%; */
+  height : 70%;
+  width: 90%;
+  margin: 2px;
+  border: 5px;
+  border-color: blue;
+}
+
+
+.search-box{
+  width: 600px;
+  background: #fff;
+  margin: 20px auto 0;
+  border-radius: 5px;
+}
+
+.row{
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.input{
+  flex: 1;
+  height: 50px;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  font-size: 18px;
+  color: #333;
+
+}
+
+button .fa-solid{
+  width:25px;
+  color: #555;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+::placeholder{
+  color: #555;
+}
+
+.result-box ul{
+  border-top: 1px solid #999;
+  padding: 15px 10px;
+}
+
+.result-box ul li{
+  list-style: none;
+  border-radius: 3px;
+  padding: 15px 10px;
+  cursor: pointer;
+}
+
+.result-box ul li:hover{
+  background: rgb(217, 232, 232);
+}

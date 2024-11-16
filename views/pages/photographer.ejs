@@ -1,0 +1,100 @@
+<html>
+
+<head>
+  <title><%= title %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/photographer.css" />
+</head>
+
+<body>
+  <%- await include("../partials/sidebar"); %>
+  <div class="photographer-bg">
+    <img class="i3" src="/assets/images/pbg.jpg" />
+    <div class="txt">
+      <h1>Choose Photographer For Your Occasion</h1>
+    </div>
+  </div>
+  <div class="choose">
+    <a href="#venue-card">
+      <button type="button" button name="btn1">Choose Venue</button>
+    </a>
+    <p>from</p>
+    <h2>Celestial Celebration</h2>
+  </div>
+  <div class="pic">
+    <div class="left">
+      <img src="/assets/images/p6.jpg" alt width="80%" />
+    </div>
+    <div class="right">
+      <div class="right-top">
+        <img src="/assets/images/p7.jpg" alt width="39%" />
+      </div>
+      <div class="right-bottom">
+        <img src="/assets/images/p8.jpg" alt width="39%" />
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <div class="venue">
+    <div class="container">
+      <div class="venue-nav">
+        <div class="nav-left">
+          <p>Hire Photographers for Your Wedding- Capture Memories!</p>
+        </div>
+        <div class="nav-right">
+          <img class="img1" src="/assets/images/p4.jpg" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="venue-card">
+    <div class="card">
+      <img class="img2" src="/assets/images/p2.jpg" />
+      <div class="card-desc">
+        <h2>Photographer</h2>
+        <p>A good photographer</p>
+        <button class="btn">Hire</button>
+      </div>
+    </div>
+    <div class="card">
+      <img class="img2" src="/assets/images/p3.jpg" />
+      <div class="card-desc">
+        <h2>Photographer</h2>
+        <p>A good photographer</p>
+        <button class="btn">Hire</button>
+      </div>
+    </div>
+    <div class="card" id="venue-card">
+      <img class="img2" src="/assets/images/p5.jpg" />
+      <div class="card-desc">
+        <h2>Photographer</h2>
+        <p>A good photographer</p>
+        <button class="btn">Hire</button>
+      </div>
+    </div>
+  </div>
+
+  <%- await include("../partials/footer"); %>
+</body>
+
+</html>

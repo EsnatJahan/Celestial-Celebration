@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beachside Wedding</title>
+    <link rel="stylesheet" href="css/wedding-package.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
+    </style>
+</head>
+<body>
+
+
+    <%- await include("../partials/sidebar"); %>
+    <div class="container">
+        <h1>A Beachside Wedding</h1>
+    </div>
+    </div>
+    <!--wedding venue section-->
+    <button class="btn" onclick="placeOrder()" >Book Now</button>
+    <section class="venue" id="venue">
+        <div class="venue-container">
+           <div class="title-text">               
+                <h1><span>V</span>enue</h1>                
+            </div>
+            <div class="venue-box">
+                <div class="lef">
+                    <h1>cox'sbazar</h1>
+                    <p> if you're planning to tie the knot, you might want to consider getting married in Cox’s Bazar. Cox’s Bazar in Bangladesh is a combination of pristine beaches, vibrant culture, and an unparalleled sense of tranquility. Located along the southeastern coast of Bangladesh, this city is not just a geographical marvel but a testament to the harmonious blend of nature’s splendor and human hospitality.
+
+                        Renowned for hosting the world’s longest natural sea beach, this city is a symphony of natural beauty, cultural diversity, and human resilience
+                    </p>
+                </div>
+                <div class="right">
+                    <img class="im1" src="img/blog1arb4VjtxhzvyUzrt9bZzuI-hlEst52F.jpg" alt="">
+                </div>
+            </div>
+            <div class="venue-box">
+                <div class="right">
+                    <img class="im2" src="img/im3.jpg" alt="">
+                </div>
+                <div class="left">
+                    <h1>Windy Terrace</h1>
+                    <p>Encompassing the spectacular views of Cox’s Bazar, 
+                        Windy Terrace Hotel stands very close to the hills and 
+                        sea-beach, offering world class facilities and exhilarating
+                         experience to its guests.
+                            Imagine that the 120 km astonishing longest beach in the world is
+                             just five-minute walk away from your room, providing an exuberant sensation in your mind and filling your heart with magnificent joy. Starting from Cox’s Bazar’s longest beach view to the comforts which you would be looking for are all here,
+                         making Windy Terrace Hotel the perfect choice for wedding feast.
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+        <h2 class="pp">price of rent: 80,000 tk </h2>
+    </section>
+    <!--wedding theme-->
+    <section class="theme" id="theme">
+        <div class="tex">
+            <h4><span>T</span>heme</h4>
+        </div>
+    <div class="center">
+        <input type="radio" name="active" id="tab-1">
+        <input type="radio" name="active" id="tab-2">
+        <input type="radio" name="active" id="tab-3">
+        <input type="radio" name="active" id="tab-4">
+        <div class="sliders">
+        <label for="tab-1"><img src="img/668361f892174e03378f2e92d21b43dc.jpg"></label>
+        <label for="tab-2"><img src="img/best-western-heritage.jpg"></label>
+        <label for="tab-3"><img src="img/34bcb037b759957367d5ec983a571c31.jpg"></label>
+        <label for="tab-4"><img src="img/Beach4.jpg"></label>
+        </div>
+        <div class="img-card">
+            <img src="img/668361f892174e03378f2e92d21b43dc.jpg">
+            <img src="img/best-western-heritage.jpg">
+            <img src="img/34bcb037b759957367d5ec983a571c31.jpg">
+            <img src="img/Beach4.jpg">
+        
+        </div>
+    </div>
+    <h5>price of decor: 30,000 tk </h5>
+</section>
+<!--wedding menu-->
+<section class="menu" id="menu">
+    <div class="tex">
+        <h4><span>M</span>enu</h4>
+    </div>
+    <div class="menu-list">
+    <div class="row">
+
+        <div class="rate">4.5&nbsp;<i class="fa-solid fa-utensils"></i> </div>
+        <img src="img/y.jpg" alt="">
+        <h6>Beef biryani&nbsp;200tk</h6>
+    </div>
+    <div class="row">
+
+        <div class="rate">4.5&nbsp;<i class="fa-solid fa-utensils"></i> </div>
+        <img src="img/0000000000000000000000A (1).jpg" alt="">
+        <h6>Fish fry&nbsp;90tk</h6>
+        
+    </div>
+    <div class="row">
+
+        <div class="rate">4.5&nbsp;<i class="fa-solid fa-utensils"></i> </div>
+        <img src="img/R (3).jpg" alt="">
+        <h6>Chicken&nbsp;50tk</h6>
+        
+    </div>
+    <div class="row">
+
+        <div class="rate">4.5&nbsp;<i class="fa-solid fa-utensils"></i> </div>
+        <img src="img/R (2).jpg" alt="">
+        <h6>Persian kabab&nbsp;60tk</h6>
+        
+    </div>
+    <div class="row">
+
+        <div class="rate">4.5&nbsp;<i class="fa-solid fa-utensils"></i> </div>
+        <img src="img/OIF.jpg" alt="">
+        <h6>appetizer&nbsp;50tk</h6>
+        
+    </div>
+    <div class="row">
+
+        <div class="rate">4.5&nbsp;<i class="fa-solid fa-utensils"></i> </div>
+        <img src="img/borhani.jpg" alt="">
+        <h6>Borhani&nbsp;60tk</h6>
+        
+    </div>
+    </div>
+
+    <h2>per plate of cost: 510 tk </h2>
+</section>
+<%- await include("../partials/footer"); %>
+</body>
+</html>

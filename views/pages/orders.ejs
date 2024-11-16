@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <link rel="stylesheet" href="/css/orders.css">
+</head>
+<% let [orders] = await db.query("SELECT * FROM orders") %>
+<body>
+    <%- await include("../partials/sidebar"); %>
+    <script>
+        //
+        async function hidedate(id){
+           try{
+               let bookings = await fetch(`/api/confirmorder?id=${id}`); // fetch the data from the server
+               if (bookings.ok) location.reload();   
+           }catch (e) {
+            console.error(e);
+           }
+        } 
+    </script>
+    <div>
+        <h1>Customer Orders</h1>
+        <br>
+        <table class="content-table">
+            <tr >
+                <h2>Venue</h2>
+                <table>
+                    <tr class="content-row">
+                        <th class="content-colh"><h2>Orner No</h2></th>
+                        <th class="content-colh"><h2>User</h2></th>
+                        <th class="content-colh"><h2>Venue</h2></th>
+                        <th class="content-colh"><h2>Date</h2></th>
+                        <th class="content-colh"><h2>Slot</h2></th>
+                        <th class="content-colh"><h2></h2></th>
+                        <th></th>
+                    </tr>
+                    <% var cnt = 0; for(let i = 0 ; i< orders.length;i++){ %>
+                       
+                        <% if(orders[i].productID <=100){%>
+                        <% let [venues] = await db.query("SELECT name FROM venues WHERE ID=?",orders[i].productID) %>
+                        <% var [year] = await db.query("SELECT EXTRACT(YEAR FROM  ?) AS year",orders[i].orderDate);    
+                        var [month] = await db.query("SELECT EXTRACT(Month FROM  ?) AS month",orders[i].orderDate);                
+                        var [day] = await db.query("SELECT EXTRACT(DAY FROM  ?) AS day",orders[i].orderDate) ;
+                        %>
+                        %>
+                         <tr>
+                            <% if(cnt%2==0) {%>
+                            <td class="content-col"><p><%= orders[i].orderID  %></p></td>
+                            <td class="content-col"><p><%= orders[i].username  %></p></td>
+                            <td class="content-col"><p><%= venues[0].name%></p></td>
+                            <td class="content-col"><%=year[0].year%>/<%=month[0].month%>/<%=day[0].day%></td>
+                            
+                            <td class="content-col"><p><%= orders[i].orderSlot  %></p></td>
+                            <td class="content-col"><button class="order-button" onclick="hidedate('<%=orders[i].orderID%>')">Confirm Booking</button></td>
+                            <% }else{ %>
+                            <td class="content-col2"><p><%= orders[i].orderID  %></p></td>
+                            <td class="content-col2"><p><%= orders[i].username  %></p></td>
+                            <td class="content-col2"><p><%= venues[0].name%></p></td>
+                            <td class="content-col2"><%=year[0].year%>/<%=month[0].month%>/<%=day[0].day%></td>
+                            <td class="content-col2"><p><%= orders[i].orderSlot  %></p></td>
+                            <td class="content-col2"><button class="order-button" onclick="hidedate('<%=orders[i].orderID%>')">Confirm Booking</button></td>
+                            <% } cnt++; %>
+                        </tr>                             
+                    <% } }%>    
+                </table>                    
+            </tr>
+            <tr>
+                <h2>Gifts</h2>
+                <table>
+                    <tr class="content-row">
+                        <th class="content-colh"><h2>Orner No</h2></th>
+                        <th class="content-colh"><h2>User</h2></th>
+                        <th class="content-colh"><h2>Gift</h2></th>
+                        <th class="content-colh"><h2>Date</h2></th>
+                        <th class="content-colh"><h2>Address</h2></th>
+                        <th class="content-colh"><h2></h2></th>
+                        <th></th>
+                    </tr>
+                    <% var CNT = 0; for(let i = 0 ; i< orders.length;i++){ %> 
+                        <% if(orders[i].productID <=400 && orders[i].productID > 300 ){%>
+                        <% let [gifts] = await db.query("SELECT productname FROM gifts WHERE ID=?",orders[i].productID) %> 
+                        <% var [year] = await db.query("SELECT EXTRACT(YEAR FROM  ?) AS year",orders[i].orderDate);    
+                        var [month] = await db.query("SELECT EXTRACT(Month FROM  ?) AS month",orders[i].orderDate);                
+                        var [day] = await db.query("SELECT EXTRACT(DAY FROM  ?) AS day",orders[i].orderDate) ;
+                        %> 
+                         <tr>
+                            <% if(cnt%2==0) {%>
+                            <td class="content-col"><p><%= orders[i].orderID  %></p></td>
+                            <td class="content-col"><p><%= orders[i].username  %></p></td>
+                            <td class="content-col"><p><%= gifts[0].productname %></p></td>
+                            <td class="content-col"><%=year[0].year%>/<%=month[0].month%>/<%=day[0].day%></td>
+                            <td class="content-col"><p><%= orders[i].location  %></p></td>
+                            
+                            <td class="content-col"><button class="order-button" onclick="hidedate('<%=orders[i].orderID%>')">Confirm Order</button></td>
+                            <% }else{ %>
+                            <td class="content-col2"><p><%= orders[i].orderID  %></p></td>
+                            <td class="content-col2"><p><%= orders[i].username  %></p></td>
+                            <td class="content-col2"><p><%= gifts[0].productname %></p></td>
+                            <td class="content-col2"><%=year[0].year%>/<%=month[0].month%>/<%=day[0].day%></td>
+                            <td class="content-col2"><p><%= orders[i].location  %></p></td>
+                            <td class="content-col2"><button class="order-button" onclick="hidedate('<%=orders[i].orderID%>')">Confirm Order</button></td>
+                             <% } cnt++; %> 
+
+                         </tr>                             
+                    <% } }%>    
+                </table>                 
+            </tr>
+            <tr>
+                <h2>Cakes</h2>
+                <table>
+                    <tr class="content-row">
+                        <th class="content-colh"><h2>Orner No</h2></th>
+                        <th class="content-colh"><h2>User</h2></th>
+                        <th class="content-colh"><h2>Gift</h2></th>
+                        <th class="content-colh"><h2>Date</h2></th>
+                        <th class="content-colh"><h2>Address</h2></th>
+                        <th class="content-colh"><h2></h2></th>
+                        <th></th>
+                    </tr>
+                    <% var cnt = 0 ; for(let i = 0 ; i< orders.length;i++){ %> 
+                        <% if(orders[i].productID <=200 && orders[i].productID > 100 ){%>
+                        <% let [cakes] = await db.query("SELECT productname FROM cakes WHERE ID=?",orders[i].productID) %>
+                        <% var [year] = await db.query("SELECT EXTRACT(YEAR FROM  ?) AS year",orders[i].orderDate);    
+                        var [month] = await db.query("SELECT EXTRACT(Month FROM  ?) AS month",orders[i].orderDate);                
+                        var [day] = await db.query("SELECT EXTRACT(DAY FROM  ?) AS day",orders[i].orderDate) ;
+                        %>  
+                         <tr>
+                            <% if(cnt%2==0){ %>
+                            <td class="content-col"><p><%= orders[i].orderID  %></p></td>
+                            <td class="content-col"><p><%= orders[i].username  %></p></td>
+                            <td class="content-col"><p><%= cakes[0].productname%></p></td>
+                            <td class="content-col"><%=year[0].year%>/<%=month[0].month%>/<%=day[0].day%></td>
+                            <td class="content-col"><p><%= orders[i].location  %></p></td>
+                            <td class="content-col"><button class="order-button" onclick="hidedate('<%=orders[i].orderID%>')">Confirm Order</button></td>
+                            <% }else{%>
+                            <td class="content-col"><p><%= orders[i].orderID  %></p></td>
+                            <td class="content-col"><p><%= orders[i].username  %></p></td>
+                            <td class="content-col"><p><%= cakes[0].productname%></p></td>
+                            <td class="content-col"><%=year[0].year%>/<%=month[0].month%>/<%=day[0].day%></td>
+                            <td class="content-col"><p><%= orders[i].location  %></p></td>
+                            <td class="content-col"><button class="order-button" onclick="hidedate('<%=orders[i].orderID%>')">Confirm Order</button></td>
+                            <% } cnt++; %>
+                        </tr>                             
+                    <% } }%>    
+                </table>                             
+            </tr>
+
+            <tr>
+                <h2>Cards</h2>
+                <table>
+                    <tr class="content-row">
+                        <th class="content-colh"><h2>Orner No</h2></th>
+                        <th class="content-colh"><h2>User</h2></th>
+                        <th class="content-colh"><h2>Card</h2></th>
+                        <th class="content-colh"><h2>Date</h2></th>
+                        <th class="content-colh"><h2>Address</h2></th>
+                        <th class="content-colh"><h2></h2></th>
+                        <th></th>
+                    </tr>
+                    <% for(let i = 0 ; i< orders.length;i++){ %> 
+                        <% if(orders[i].productID <=300 && orders[i].productID > 200 ){%>
+                        <% let [cards] = await db.query("SELECT productname FROM cards WHERE ID=?",orders[i].productID) %>  
+                        <% var [year] = await db.query("SELECT EXTRACT(YEAR FROM  ?) AS year",orders[i].orderDate);    
+                        var [month] = await db.query("SELECT EXTRACT(Month FROM  ?) AS month",orders[i].orderDate);                
+                        var [day] = await db.query("SELECT EXTRACT(DAY FROM  ?) AS day",orders[i].orderDate) ;
+                        %>
+                         <tr>
+                            <td class="content-col"><p><%= orders[i].orderID  %></p></td>
+                            <td class="content-col"><p><%= orders[i].username  %></p></td>
+                            <td class="content-col"><p><%= cards[0].productname %></p></td>
+                            <td class="content-col"><%=year[0].year%>/<%=month[0].month%>/<%=day[0].day%></td>
+                            <td class="content-col"><p><%= orders[i].location  %></p></td>
+                            <td class="content-col"><button class="order-button" onclick="hidedate('<%=orders[i].orderID%>')">Confirm Order</button></td>
+                         </tr>                             
+                    <% } }%>    
+                </table>                 
+            </tr>
+
+            <tr>
+                <h2>Photographers</h2>
+                <table>
+                    <tr>
+                        <th><p>Orner No</p></th>
+                        <th><p>Location</p></th>
+                        <th><p>Date</p></th>
+                        <th><p>Slot</p></th>
+                    </tr>
+                </table>
+            </tr>
+        </table>
+            
+                
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules/",
+    "node_modules/**/node_modules"
+  ],
+  "execMap": {
+    "js": "node --harmony"
+  },
+  "events": {
+    "restart": "echo \"App restarted due to:\n'$FILENAME'\""
+  },
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "mjs,cjs,js,json,ejs"
+}

@@ -1,0 +1,394 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+.header .container {
+  width: 1140px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+.nav-bar {
+}
+.nav-left {
+  padding-left: 5px;
+  margin: 5px;
+}
+
+.nav-right {
+  margin: 5px;
+}
+.nav-right ul {
+  display: flex;
+  justify-content: space-between;
+}
+.nav-right ul li {
+  padding: 10px;
+  letter-spacing: 2px;
+}
+.nav-right ul li a {
+  color: rgb(33, 29, 29);
+  font-family: "Poppins";
+  font-size: 14px;
+  font-weight: 600;
+}
+.nav-right ul li a:hover {
+  transition: 0.3s ease-in-out;
+  color: blueviolet;
+  transform: scale(1.1);
+}
+.header {
+  background-image: url(../img/venue1.jpg);
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.footer {
+  background-color: #a8b8ae;
+  margin: 30px;
+  border-radius: 10px;
+  padding: 25px;
+}
+.footer .container {
+  display: flex;
+  justify-content: space-between;
+}
+.footer-left h3 {
+  color: rgb(72, 66, 66);
+  margin: 20px;
+  letter-spacing: 1px;
+  font-family: "Farro";
+  font-size: 18px;
+}
+.footer-left ul {
+  display: flex;
+}
+.footer-left ul li a {
+  color: black;
+  padding-left: 15px;
+}
+.footer-left ul li a:hover {
+  transition: 0.3s ease-in-out;
+  transform: scale(1.1);
+  color: blueviolet;
+}
+
+.footer-middle ul {
+  padding: 15px;
+}
+.footer-middle ul li {
+  padding-bottom: 10px;
+  font-weight: 500;
+}
+.footer-middle ul li a {
+  color: black;
+  font-weight: 500;
+  font-family: "Roboto";
+  font-size: 14px;
+}
+.footer-middle ul li a:hover {
+  transition: 0.4s ease-in-out;
+  transform: scale(1.5);
+  color: blueviolet;
+}
+
+.footer-right p {
+  padding: 8px;
+}
+.copy-right {
+  text-align: center;
+}
+.copy-right .container {
+  text-align: center;
+}
+.copy-right span {
+  text-align: center;
+  letter-spacing: 1px;
+  padding-bottom: 10px;
+  font-family: "Farro";
+  font-size: 14px;
+}
+.functions .container {
+  width: 1140px;
+  margin: auto;
+}
+.services h1 {
+  text-align: center;
+  margin: 35px;
+  font-family: "Roboto";
+  color: rgb(117, 117, 184);
+}
+.s-top {
+  display: flex;
+  justify-content: center;
+}
+.s-top .cake {
+  margin: 10px;
+  padding: 15px;
+}
+h6 {
+  margin: 10px;
+  padding: 10px;
+  font-family: "Farro";
+  font-size: 15px;
+  color: slategrey;
+  text-align: center;
+}
+.cake button {
+  font-family: "Roboto";
+  letter-spacing: 2px;
+  font-weight: 600;
+  background-color: slategray;
+  color: white;
+  padding: 15px 60;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+}
+
+.cake:hover {
+  transform: scale(0.95);
+  transition: 0.3s ease-in-out;
+}
+.s-top .gift {
+  margin: 10px;
+  padding: 15px;
+}
+.gift button {
+  font-family: "Roboto";
+  letter-spacing: 2px;
+  font-weight: 600;
+  background-color: slategray;
+  color: white;
+  padding: 15px 60px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+}
+.gift :hover {
+  transform: scale(0.95);
+  transition: 0.3s ease-in-out;
+}
+.s-top .card {
+  margin: 10px;
+  padding: 15px;
+}
+.card button {
+  font-family: "Roboto";
+  letter-spacing: 2px;
+  font-weight: 600;
+  background-color: slategray;
+  color: white;
+  padding: 15px 84;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+}
+.card:hover {
+  transform: scale(0.95);
+  transition: 0.3s ease-in-out;
+}
+.s-bottom {
+  display: flex;
+  justify-content: center;
+}
+.s-bottom .photographer {
+  margin: 10px;
+  padding: 15px;
+}
+.photographer button {
+  font-family: "Roboto";
+  letter-spacing: 2px;
+  font-weight: 600;
+  background-color: slategray;
+  color: white;
+  padding: 15px 200px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+}
+.photographer:hover {
+  transform: scale(0.95);
+  transition: 0.3s ease-in-out;
+}
+.s-bottom .venue {
+  padding: 15px;
+  margin: 10px;
+}
+.venue button {
+  font-family: "Roboto";
+  letter-spacing: 2px;
+  font-weight: 600;
+  background-color: slategray;
+  color: white;
+  padding: 15px 200px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+}
+.venue:hover {
+  transform: scale(0.95);
+  transition: 0.3s ease-in-out;
+}
+.vendor .container {
+  width: 1140px;
+  margin: auto;
+}
+.vendor-1 h1 {
+  text-align: center;
+  margin: 35px;
+  font-family: "Roboto";
+  color: green;
+  padding: 25px;
+  font-weight: 1200;
+}
+.v-top {
+  display: flex;
+  justify-content: center;
+}
+.beauty button {
+  font-family: "Roboto";
+  letter-spacing: 2px;
+  font-weight: 600;
+  background-color: rgb(149, 185, 149);
+  color: white;
+  padding: 40px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  margin: 15px;
+}
+.beauty:hover {
+  transition: 1.2s ease-in-out;
+  transform: scale(0.8);
+}
+.salon button {
+  font-family: "Roboto";
+  letter-spacing: 2px;
+  font-weight: 600;
+  background-color: rgb(149, 185, 149);
+  color: white;
+  padding: 40px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  margin: 15px;
+}
+.salon:hover {
+  transition: 1.2s ease-in-out;
+  transform: scale(0.8);
+}
+.caterar button {
+  font-family: "Roboto";
+  letter-spacing: 2px;
+  font-weight: 600;
+  background-color: rgb(149, 185, 149);
+  color: white;
+  padding: 40px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  margin: 15px;
+}
+.caterar:hover {
+  transition: 1.2s ease-in-out;
+  transform: scale(0.8);
+}
+.v-middle {
+  display: flex;
+  justify-content: center;
+}
+.planner button {
+  font-family: "Roboto";
+  letter-spacing: 2px;
+  font-weight: 600;
+  background-color: rgb(149, 185, 149);
+  color: white;
+  padding: 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  margin: 20px;
+}
+.planner:hover {
+  transition: 1.2s ease-in-out;
+  transform: scale(0.8);
+}
+.transport button {
+  font-family: "Roboto";
+  letter-spacing: 2px;
+  font-weight: 600;
+  background-color: rgb(149, 185, 149);
+  color: white;
+  padding: 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  margin: 20px;
+}
+.transport:hover {
+  transition: 1.2s ease-in-out;
+  transform: scale(0.8);
+}
+.v-bottom {
+  display: flex;
+  justify-content: center;
+}
+.florist button {
+  font-family: "Roboto";
+  letter-spacing: 2px;
+  font-weight: 600;
+  background-color: rgb(149, 185, 149);
+  color: white;
+  padding: 40px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  margin: 15px;
+}
+.florist:hover {
+  transition: 1.2s ease-in-out;
+  transform: scale(0.8);
+}
+.video button {
+  font-family: "Roboto";
+  letter-spacing: 2px;
+  font-weight: 600;
+  background-color: rgb(149, 185, 149);
+  color: white;
+  padding: 40px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  margin: 15px;
+}
+.video:hover {
+  transition: 1.2s ease-in-out;
+  transform: scale(0.8);
+}
+.place button {
+  font-family: "Roboto";
+  letter-spacing: 2px;
+  font-weight: 600;
+  background-color: rgb(149, 185, 149);
+  color: white;
+  padding: 40px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  margin: 15px;
+}
+.place:hover {
+  transition: 1.2s ease-in-out;
+  transform: scale(0.8);
+}

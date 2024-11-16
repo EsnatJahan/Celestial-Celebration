@@ -1,0 +1,45 @@
+.header .container {
+    width: 1140px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  /*.nav-bar{
+     
+      
+  }*/
+  .nav-left {
+    /* padding-left: 5px; */
+    /* margin: 5px; */
+  }
+  
+  .nav-right {
+    margin: 5px;
+  }
+  .nav-right ul {
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav-right ul li {
+    padding: 10px;
+    letter-spacing: 2px;
+  }
+  .nav-right ul li a {
+    color: rgb(33, 29, 29);
+    font-family: "Poppins";
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .nav-right ul li a:hover {
+    transition: 0.3s ease-in-out;
+    color: blueviolet;
+    transform: scale(1.1);
+  }
+  .header {
+    /* background-image: url(/assets/images/venue1.jpg);  */
+    background-image: url(/assets/images/image.png);
+    height: 40vh;
+     background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+  }

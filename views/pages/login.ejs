@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>signup</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../css/login.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+        <script>
+            async function checkuser(){            
+            let username = document.getElementById("mailselector").value;
+            let pass = document.getElementById("passselector").value;            
+            try {
+                let response = await fetch("/api/user", {
+                     method: "POST",
+                     headers: {
+                     "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                     username,
+                     pass,
+                }),
+                })
+                if(response.ok){
+                   alert('Successful Log In');
+                   window.location.assign('home');
+                }else{
+                   alert('Unsucessful Log In')
+                } 
+            } catch (e) {
+                console.error(e); // log the error
+            }
+
+           }
+
+        </script>
+            
+        <!-- %>  -->
+        <%- await include("../partials/sidebar"); %>    
+        <div class="login-box">
+            <h1>Login</h1>
+            <form>
+            <input id="mailselector" type="email"   placeholder="Enter your username id">
+            <label>Password</label>
+            <input id="passselector" type="password" placeholder="password">
+            <!-- <label>Confirm Password</label>
+            <input type="password" placeholder="confirm pass"> -->
+            <input class="login_button" type="button" onclick="checkuser()" value="Submit">
+            </form>
+        </div>
+        <p class="para-2">Not have an account? <a href="signup.html">Sign Up Here</a></p>
+    </body>
+    
+</html>

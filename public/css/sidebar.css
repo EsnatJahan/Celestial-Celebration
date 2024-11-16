@@ -1,0 +1,128 @@
+/* @import url("base.css"); */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.bardiv {
+  display: grid;
+  grid-template-columns: 780px 200px;
+  z-index: 100;
+  font-family: "Poppins", sans-serif;
+}
+
+.menutext {
+  font-weight: 600;
+  font-family: "Merriweather", sans-serif;
+  font-size: x-large;
+  height: 40px;
+  width: 100%;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 99;
+  display: none;
+}
+
+.sidebar {
+  position: fixed;
+  padding: 0, 20px;
+  left: -260px;
+  width: 240px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  /* background: antiquewhite */
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 100px rgb(255, 255, 255);
+  z-index: 100;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  height: 65px;
+  width: 100%;
+  text-justify: end;
+  line-height: 65px;
+  padding-left: 10px;
+  text-decoration: none;
+  /* border-bottom: 0.5px solid black; */
+  /* border-left: 5px solid red;
+  border-top: 1px solid black; */
+  box-sizing: border-box;
+}
+
+.sidebar a:hover,
+a.active {
+  border-left: 5px solid #b93623;
+  color: #b93623;
+}
+
+.sidebar a i {
+  font-size: 23px;
+  margin-right: 16px;
+}
+
+.sidebar a span {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+#check {
+  display: none;
+}
+
+label #barbutton,
+label #cancel {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  cursor: pointer;
+  background: #262626;
+  height: 45px;
+  width: 45px;
+  text-align: center;
+  line-height: 45px;
+  color: white;
+  border: 1px solid #262626;
+  border-radius: 5px;
+  margin: 5px 10px;
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+label #cancel {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#check:checked ~ label #barbutton {
+  margin-left: 245px;
+  opacity: 1;
+  visibility: hidden;
+}
+
+#check:checked ~ label #cancel {
+  margin-left: 245px;
+  opacity: 1;
+  visibility: visible;
+}
+
+#check:checked ~ .sidebar {
+  left: 0;
+}
+
+.current-page {
+  border-left: 5px solid blueviolet;
+  color: blueviolet !important;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0px 20px 20px 0px;
+}

@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <title>signup</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../css/login.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <script>
+            async function checkuser(){            
+            let firstname = document.getElementById("firstname").value;
+            // let lastname = document.getElementById("lastname").value;
+            let username = document.getElementById("username").value;
+            let pass= document.getElementById("pass").value;
+            let cpass = document.getElementById("cpass").value;
+            let mail = document.getElementById("mail").value;
+            let phone = document.getElementById("phone").value;
+            let address = document.getElementById("address").value;
+            if(pass != cpass){
+                alert('Confirm Password Correctly!');
+            }         
+            try {
+                let response = await fetch("/api/signup", {
+                     method: "POST",
+                     headers: {
+                     "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                     firstname,
+                    //  lastname,
+                     username,
+                     pass,
+                     mail,
+                     phone,
+                     address,
+                }),
+                })
+                if(response.ok){
+                   alert('Signed up Successfully');
+                   window.location.assign('home');
+                }else{
+                   alert('Unsucessful Log In')
+                } 
+            } catch (e) {
+                console.error(e); // log the error
+            }
+
+           }
+
+        </script>
+        <div class="signup-box">
+        <h1>Sign Up</h1>
+        <h4>It's free and only takes a minute</h4>
+        <form>
+            <label>Name</label>
+            <input id="firstname"  type="text" placeholder="">
+            <label>Username</label>
+            <input id="username" type="text" placeholder="">
+            <label>Email</label>
+            <input id="mail" type="email" placeholder="">
+            <label>Password</label>
+            <input id="pass" type="password" placeholder="">
+            <label>Confirm Password</label>
+            <input id="cpass" type="password" placeholder="">
+            <label>Phone Number</label>
+            <input id="phone" type="text" placeholder="">
+            <label>Address</label>
+            <input id="address" type="text" placeholder="">
+            <input class="bt" type="button" onclick="checkuser()" value="Submit">
+        </form>
+        <p>By clicking the Sign Up button, you agree to our<br>
+        <a href="#">Terms and Condition</a> and <a href="#">Policy and Privacy</a>
+        </p>
+        </div>
+        <p class="para-2">Already have an account? <a href="login.html">Login here</a></p>
+    </body>
+</html>

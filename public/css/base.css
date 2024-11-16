@@ -1,0 +1,166 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+   background-color:  rgb(222, 204, 211);
+}
+
+.all {
+  padding-top: 50px;
+}
+.all:hover {
+  box-shadow: 0 0 20px #ccc;
+  /* transform: scale(1.01); */
+}
+
+.divbouquet {
+  display: flex;
+  background-color: rgb(235, 209, 235); 
+  justify-content: end;
+  padding-top: 2px;
+  /* padding-right: 5%; */
+}
+
+.bouquetpara {
+  padding-top: 25px;
+  text-align: end;
+  font-size: xx-large;
+  font-style: italic;
+  padding-right: 20px;
+  justify-content: end;
+}
+.bouquetpara2 {
+  text-align: end;
+  font-size: xx-large;
+  font-style: italic;
+  padding-right: 20px;
+  padding-top: 15px;
+}
+
+.bouquet {
+  height: 150px;
+  width: 220px;
+  padding-left: 15px;
+  padding-top: 0%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media screen and (max-width: 1024px) {
+  .grid-cols-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.youtube-icon {
+  font-size: 2rem;
+  color: red;
+  margin: 10px;
+  transform: translateY(20%);
+}
+
+.btn {
+  display: block;
+  text-align: center;
+  /* position: relative; */
+  background-color: #91bd91;
+  height: 50px;
+  width: 200px;
+  margin: 15px auto;
+  font-size: xx-large;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    cursor: pointer;
+    scale: 1.1;
+    background-color: #333;
+    transition: scale 0.1s ease-in-out;
+  }
+}
+
+
+.container3 {
+  display: grid;
+  width: 100%;
+  padding: 0 5%;
+  /* grid-row: 1fr 1fr; */
+  grid-template-rows: auto;
+  justify-content: center;
+  gap: 30px;
+  margin: auto;
+  padding-top: 30px;
+}
+.card {
+  height: 50vh;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px #ccc;
+  /* background-color: rgb(246, 219, 184); */
+  background-color:rgb(222, 213, 213);
+  /* background-color:rgb(203, 173, 173) ; */
+  box-shadow: 10px 10px 10px black;
+}
+.card:hover {
+  /* box-shadow: 0 0 20px #ccc; */
+  box-shadow: 10px 10px 10px black;
+  transform: scale(1.03);
+  transition: transform 0.2s ease-in-out;
+}
+
+
+.b1 {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+
+.product-name {
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  font-style: italic;
+  color: black;
+}
+
+.product-price {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f00;
+  text-align: center;
+}
