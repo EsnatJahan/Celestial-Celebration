@@ -1,5 +1,8 @@
 # Celesial Celebration
 This is an event management project. In this project we focused on services essential in different events such as photography, wedding planner, wedding venues etc. We used html and css in frontend for designing the website and javascript for backend. 
+
+
+
 ![images](gitimagecelescial/image4.png)
 
 ## **Features**  
