@@ -41,4 +41,5 @@ npm install --legacy-peer-deps
 ### **4. Run the Development Server**  
 ```bash  
 npm run dev  
-```  
+```
+The app will be available at [http://localhost:8000](http://localhost:8000).  
