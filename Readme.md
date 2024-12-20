@@ -3,7 +3,8 @@ This is an event management project. In this project we focused on services esse
 
 
 
-![images](gitimagecelescial/image6.png)
+| ![Image 1](gitimagecelescial/image6.png) | ![Image 2](gitimagecelescial/image2.png)|
+|------------------------------------------|------------------------------------------|
 | ![Image 1](gitimagecelescial/menue.png) | ![Image 2](gitimagecelescial/image3.png)|
 |-----------------------------------------|-----------------------------------------|
                       
