@@ -3,7 +3,7 @@ This is an event management project. In this project we focused on services esse
 
 
 
-![images](gitimagecelescial/image5.png)
+![images](gitimagecelescial/image5.png) ![images](gitimagecelescial/image3.png)
 
 ## **Features**  
 - Intuitive User interface for showcasing available productss.
