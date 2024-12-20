@@ -6,7 +6,7 @@ This is an event management project. In this project we focused on services esse
 ![images](gitimagecelescial/image6.png)
 | ![Image 1](gitimagecelescial/menue.png) | ![Image 2](gitimagecelescial/cakeimg.png) |
 |-----------------------------------------|-----------------------------------------|
-| Menu Image                              | Cake Image                              |
+                      
 
 
 ## **Features**  
